@@ -47,9 +47,10 @@ class HEpigramLinter:
                 errors.append('The specified theme dir does not exists.')
 
         elif 'theme' not in yaml_data and not input_data['theme']['name']:
-            warnings.append('You should specify a theme; '
-                            'defaulting to `readthedocs`.')
             yaml_data['theme'] = 'readthedocs'
+            if not input_data['theme']['path']:
+                warnings.append('You should specify a theme; '
+                                'defaulting to `readthedocs`.')
 
         # We need a hepigram.yml at the document source
         if input_data['source']['type'] == 'git':
