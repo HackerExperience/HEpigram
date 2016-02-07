@@ -161,8 +161,7 @@ class HEpigram:
         self.teardown()
 
     def teardown(self):
-        print('td')
-        print(self.input_data)
+
         # Remove build env (if requested)
         if self.input_data['build']['flag_remove']:
             self.MkDocs.destroy_build_env()
@@ -177,21 +176,25 @@ class HEpigram:
 
         # Rule 1 - If first chapter is a single entry, rename it to index.
 
-        if isinstance(chapters[0], dict):
+        first_page_key = list(chapters[0].keys())[0]
+        first_page = chapters[0][first_page_key]
+
+        # First chapter is not a single page, so no index for you.
+        if not isinstance(first_page, str):
             return chapters
 
-        first_page = list(chapters[0].keys())[0]
+        # We already have an index (:
         if first_page == 'index':
             return chapters
 
         # Change `first_page.md` to `index.md` on our build dir
-        cmd = 'mv {build}/{fp}.md {build}/index.md'.format(
-            build=self.BUILD_DIR, fp=first_page
+        cmd = 'mv {build}/{fp} {build}/index.md'.format(
+            build=self.MkDocs.BUILD_DIR, fp=first_page
         ).replace('//', '/')
         call(cmd, shell=True)
 
         # Change `first_page.md` to `index.md` on our chapters list.
-        chapters[0][first_page] = 'index.md'
+        chapters[0][first_page_key] = 'index.md'
 
         return chapters
 
