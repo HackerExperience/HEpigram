@@ -132,10 +132,6 @@ class HEpigram:
             self.read_hepigram_config()
             HEpigramLinter.lint_config(self.CONFIG, self.input_data)
 
-
-            print('ok, new config is', self.CONFIG)
-            print('paths is', self.MkDocs.DOCS_DIR)
-
         if self.in_thread:
             self.MkDocs.OUTPUT_DIR += '/' + self.DOCNAME
 
