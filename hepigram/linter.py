@@ -19,8 +19,10 @@ class HEpigramLinter:
         warnings = []
 
         # We need a `chapters` entry...
-        if 'chapters' not in yaml_data:
+        if 'chapters' not in yaml_data and 'source' not in yaml_data:
             errors.append('Missing chapter layout.')
+        elif 'source' in yaml_data:
+            return
 
         # If first chapter is not a single file then we do not have a
         # pre-defined index.html entry; will 404 on default MkDocs webserver.

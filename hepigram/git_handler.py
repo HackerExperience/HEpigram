@@ -23,5 +23,6 @@ class GitHandler:
         )
         call(cmd, shell=True)
 
+
 def is_git_uri(path):
     return '.' in path and get_extension(path) == 'git'
