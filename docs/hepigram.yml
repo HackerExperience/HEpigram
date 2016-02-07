@@ -1,3 +1,7 @@
 title: 'HEpigram'
 chapters:
     - 'Introduction'
+    - 'Getting Started'
+    - 'Schema'
+    - 'Configuration'
+    - 'Themes'
