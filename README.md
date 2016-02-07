@@ -4,8 +4,6 @@ HEpigram is a tool that handles your documents automation, allowing your reposit
 
 On top of that, HEpigram adds a programmable and extensible layer to your documents, making its output fully customizable.
 
-HEpigram an awesome tool to keep a collection of internal notes, or a self-knowledge 
-
 # Examples
 
 ### Simple use-case
@@ -24,10 +22,11 @@ Suppose you have several git repositories (or directories) for your documents, l
 
 Then, you create a umbrella repository, called `Documents`, to point to each document. Something like:
 
-- Docs
- - MyDocs1 -> MyDocs1.git
- - MyDocs2 -> MyDocs2.git
- - MyDocs3 -> MyDocs3.git
+DOCS
+|-- MyDocs1 -> MyDocs1.git
+|-- MyDocs2 -> MyDocs2.git
+`-- MyDocs3 -> MyDocs3.git
+
 
 (Note that we have 4 different repositories; 3 for documents and 1 for keeping them together).
 
@@ -37,15 +36,16 @@ Now, with HEpigram, you can assemble them in the following way:
     
 HEpigram will follow the reference, fetch each MyDocs repository, compile each one and output them to `/var/www`, like:
 
-- /var/www
-  - MyDocs1
-  - MyDocs2
-  - MyDocs3
+/var/www
+|-- MyDocs1
+|-- MyDocs2
+`-- MyDocs3
 
 Now, with a webserver, you can navigate and surf trough your documentation. For a quick webserver setup, use the `--serve` flag (not recommended for production).
-    
+
 
 # License
 
 HEpigram is licensed under the MIT license.  
+
 Copyright (c) 2016 Neoart Labs, LLC
