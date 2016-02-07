@@ -65,7 +65,7 @@ class MkDocs:
 
         # Copy theme to build location
 
-        # Copy source files to build dir. No need if git
+        # Copy source files to build dir.
         if self.DOCS_DIR != self.BUILD_DIR:
             cmd = 'cp -r {source}/* {build} >> /dev/null'.format(
                 source=self.DOCS_DIR, build=self.BUILD_DIR

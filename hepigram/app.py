@@ -11,7 +11,6 @@ from hepigram.git_handler import GitHandler, CLONE_PATH
 class HEpigram:
 
     DOCNAME = ''
-    BUILD_DIR = ''
     SOURCE_PATH = ''
     CONFIG = None
 
@@ -39,20 +38,19 @@ class HEpigram:
         HEpigramLinter.lint_input(self.input_data)
 
         self.SOURCE_PATH = absolutify(self.input_data['source']['path'])
-        self.BUILD_DIR = absolutify(self.input_data['build']['path'])
 
         self.GitHandler.ORIGIN_PATH = self.SOURCE_PATH
 
     def prepare_git(self):
 
         self.SOURCE_PATH = CLONE_PATH
-        self.BUILD_DIR = CLONE_PATH
+        self.MkDocs.BUILD_DIR = CLONE_PATH
 
         # Clone repository to `CLONE_PATH`
         self.GitHandler.clone(CLONE_PATH)
 
     def prepare_mkdocs(self):
-        self.MkDocs.BUILD_DIR = self.BUILD_DIR
+        self.MkDocs.BUILD_DIR = absolutify(self.input_data['build']['path'])
         self.MkDocs.DOCS_DIR = self.SOURCE_PATH
         self.MkDocs.OUTPUT_DIR = absolutify(self.input_data['output'])
 
@@ -98,6 +96,7 @@ class HEpigram:
         self.GitHandler.ORIGIN_PATH = source
         self.DOCNAME = str(self.SOURCE_PATH.split('/')[-1])
         self.SOURCE_PATH = CLONE_PATH + self.DOCNAME
+        self.MkDocs.BUILD_DIR = self.SOURCE_PATH
         self.GitHandler.clone(self.SOURCE_PATH)
 
     def start(self):
@@ -126,9 +125,16 @@ class HEpigram:
             if 'source_path' in self.CONFIG:
                 self.SOURCE_PATH += '/' + str(self.CONFIG['source_path'])
 
+            # Tell MkDocs about our new sourcepath
+            self.MkDocs.BUILD_DIR = self.SOURCE_PATH
+
             # Read the source hepigram.yml & lint it.
             self.read_hepigram_config()
             HEpigramLinter.lint_config(self.CONFIG, self.input_data)
+
+
+            print('ok, new config is', self.CONFIG)
+            print('paths is', self.MkDocs.DOCS_DIR)
 
         if self.in_thread:
             self.MkDocs.OUTPUT_DIR += '/' + self.DOCNAME
