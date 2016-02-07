@@ -121,6 +121,12 @@ class HEpigram:
         # In that case, we'll fetch that repository and its hepigram.yml
         if 'source' in self.CONFIG:
             self.fetch_from_source(self.CONFIG['source'])
+
+            # The user might have specified a custom directory.
+            if 'source_path' in self.CONFIG:
+                self.SOURCE_PATH += '/' + str(self.CONFIG['source_path'])
+
+            # Read the source hepigram.yml & lint it.
             self.read_hepigram_config()
             HEpigramLinter.lint_config(self.CONFIG, self.input_data)
 
