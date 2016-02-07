@@ -22,10 +22,10 @@ Suppose you have several git repositories (or directories) for your documents, l
 
 Then, you create a umbrella repository, called `Documents`, to point to each document. Something like:
 
-DOCS
-|-- MyDocs1 -> MyDocs1.git
-|-- MyDocs2 -> MyDocs2.git
-`-- MyDocs3 -> MyDocs3.git
+    DOCS
+    |-- MyDocs1 -> MyDocs1.git
+    |-- MyDocs2 -> MyDocs2.git
+    `-- MyDocs3 -> MyDocs3.git
 
 
 (Note that we have 4 different repositories; 3 for documents and 1 for keeping them together).
@@ -36,10 +36,10 @@ Now, with HEpigram, you can assemble them in the following way:
     
 HEpigram will follow the reference, fetch each MyDocs repository, compile each one and output them to `/var/www`, like:
 
-/var/www
-|-- MyDocs1
-|-- MyDocs2
-`-- MyDocs3
+    /var/www
+    |-- MyDocs1
+    |-- MyDocs2
+    `-- MyDocs3
 
 Now, with a webserver, you can navigate and surf trough your documentation. For a quick webserver setup, use the `--serve` flag (not recommended for production).
 
