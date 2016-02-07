@@ -18,7 +18,8 @@ class GitHandler:
 
     def clone(self, destination):
 
-        cmd = 'git clone {origin} {destination}'.format(
+        print('Cloning into', destination)
+        cmd = 'git clone {origin} {destination} > /dev/null 2>&1'.format(
             origin=self.ORIGIN_PATH, destination=destination
         )
         call(cmd, shell=True)
