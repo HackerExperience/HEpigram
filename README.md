@@ -20,7 +20,7 @@ Suppose you have several git repositories (or directories) for your documents, l
 - MyDoc2
 - MyDoc3
 
-Then, you create a umbrella repository, called `Documents`, to point to each document. Something like:
+Then, you create an umbrella repository, called `Documents`, to point to each document. Something like:
 
     DOCS
     |-- MyDocs1 -> MyDocs1.git
